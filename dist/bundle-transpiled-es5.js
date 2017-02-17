@@ -344,12 +344,12 @@ module.exports = {
 /**
  * @typedef {!{id: number, completed: boolean, title: string}}
  */
-var Item;
+var Item = void 0;
 
 /**
  * @typedef {!Array<Item>}
  */
-var ItemList;
+var ItemList = void 0;
 
 /**
  * Enum containing a known-empty record type, matching only empty records unlike Object.
@@ -365,7 +365,7 @@ var Empty = {
  *
  * @typedef {Empty}
  */
-var EmptyItemQuery;
+var EmptyItemQuery = void 0;
 
 /**
  * Reference to the only EmptyItemQuery instance.
@@ -377,12 +377,12 @@ var emptyItemQuery = Empty.Record;
 /**
  * @typedef {!({id: number}|{completed: boolean}|EmptyItemQuery)}
  */
-var ItemQuery;
+var ItemQuery = void 0;
 
 /**
  * @typedef {!({id: number, title: string}|{id: number, completed: boolean})}
  */
-var ItemUpdate;
+var ItemUpdate = void 0;
 
 module.exports = {
   Item: Item,
@@ -440,7 +440,7 @@ module.exports = function () {
    * @param {ItemList} todos Array of todos to write
    */
 		this.setLocalStorage = function (todos) {
-			localStorage.setItem(name, JSON.stringify(liveTodos = todos));
+			return localStorage.setItem(name, JSON.stringify(liveTodos = todos));
 		};
 
 		if (callback) {
@@ -541,18 +541,14 @@ module.exports = function () {
 
 			var todos = this.getLocalStorage().filter(function (todo) {
 				for (k in query) {
-					if (query[k] !== todo[k]) {
-						return true;
-					}
+					if (query[k] !== todo[k]) return true;
 				}
 				return false;
 			});
 
 			this.setLocalStorage(todos);
 
-			if (callback) {
-				callback(todos);
-			}
+			if (callback) callback(todos);
 		}
 
 		/**
@@ -572,8 +568,7 @@ module.exports = function () {
 
 				while (i--) {
 					completed += data[i].completed;
-				}
-				callback(total, total - completed, completed);
+				}callback(total, total - completed, completed);
 			});
 		}
 	}]);
@@ -818,9 +813,7 @@ module.exports = function () {
 		value: function setItemComplete(id, completed) {
 			var listItem = qs('[data-id="' + id + '"]');
 
-			if (!listItem) {
-				return;
-			}
+			if (!listItem) return;
 
 			listItem.className = completed ? 'completed' : '';
 
@@ -859,9 +852,7 @@ module.exports = function () {
 				var target = _ref2.target;
 
 				var title = target.value.trim();
-				if (title) {
-					handler(title);
-				}
+				if (title) handler(title);
 			});
 		}
 
@@ -884,8 +875,7 @@ module.exports = function () {
 		value: function bindToggleAll(handler) {
 			$on(this.$toggleAll, 'click', function (_ref3) {
 				var target = _ref3.target;
-
-				handler(target.checked);
+				return handler(target.checked);
 			});
 		}
 
@@ -898,8 +888,7 @@ module.exports = function () {
 		value: function bindRemoveItem(handler) {
 			$delegate(this.$todoList, '.destroy', 'click', function (_ref4) {
 				var target = _ref4.target;
-
-				handler(_itemId(target));
+				return handler(_itemId(target));
 			});
 		}
 
@@ -927,9 +916,7 @@ module.exports = function () {
 			$delegate(this.$todoList, 'li .edit', 'blur', function (_ref6) {
 				var target = _ref6.target;
 
-				if (!target.dataset.iscanceled) {
-					handler(_itemId(target), target.value.trim());
-				}
+				if (!target.dataset.iscanceled) handler(_itemId(target), target.value.trim());
 			}, true);
 
 			// Remove the cursor from the input when you hit enter just like if it were a real form
@@ -937,9 +924,7 @@ module.exports = function () {
 				var target = _ref7.target,
 				    keyCode = _ref7.keyCode;
 
-				if (keyCode === ENTER_KEY) {
-					target.blur();
-				}
+				if (keyCode === ENTER_KEY) target.blur();
 			});
 		}
 

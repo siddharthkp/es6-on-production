@@ -1,12 +1,12 @@
 /**
  * @typedef {!{id: number, completed: boolean, title: string}}
  */
-var Item;
+let Item;
 
 /**
  * @typedef {!Array<Item>}
  */
-var ItemList;
+let ItemList;
 
 /**
  * Enum containing a known-empty record type, matching only empty records unlike Object.
@@ -22,24 +22,24 @@ const Empty = {
  *
  * @typedef {Empty}
  */
-var EmptyItemQuery;
+let EmptyItemQuery;
 
 /**
  * Reference to the only EmptyItemQuery instance.
  *
  * @type {EmptyItemQuery}
  */
-const emptyItemQuery = Empty.Record;
+let emptyItemQuery = Empty.Record;
 
 /**
  * @typedef {!({id: number}|{completed: boolean}|EmptyItemQuery)}
  */
-var ItemQuery;
+let ItemQuery;
 
 /**
  * @typedef {!({id: number, title: string}|{id: number, completed: boolean})}
  */
-var ItemUpdate;
+let ItemUpdate;
 
 
 module.exports = {

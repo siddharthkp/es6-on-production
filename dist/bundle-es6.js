@@ -251,12 +251,12 @@ module.exports = {
 /**
  * @typedef {!{id: number, completed: boolean, title: string}}
  */
-var Item;
+let Item;
 
 /**
  * @typedef {!Array<Item>}
  */
-var ItemList;
+let ItemList;
 
 /**
  * Enum containing a known-empty record type, matching only empty records unlike Object.
@@ -272,24 +272,24 @@ const Empty = {
  *
  * @typedef {Empty}
  */
-var EmptyItemQuery;
+let EmptyItemQuery;
 
 /**
  * Reference to the only EmptyItemQuery instance.
  *
  * @type {EmptyItemQuery}
  */
-const emptyItemQuery = Empty.Record;
+let emptyItemQuery = Empty.Record;
 
 /**
  * @typedef {!({id: number}|{completed: boolean}|EmptyItemQuery)}
  */
-var ItemQuery;
+let ItemQuery;
 
 /**
  * @typedef {!({id: number, title: string}|{id: number, completed: boolean})}
  */
-var ItemUpdate;
+let ItemUpdate;
 
 
 module.exports = {
@@ -334,9 +334,7 @@ module.exports = class Store {
 		 *
 		 * @param {ItemList} todos Array of todos to write
 		 */
-		this.setLocalStorage = (todos) => {
-			localStorage.setItem(name, JSON.stringify(liveTodos = todos));
-		};
+		this.setLocalStorage = todos => localStorage.setItem(name, JSON.stringify(liveTodos = todos));
 
 		if (callback) {
 			callback();
@@ -423,18 +421,14 @@ module.exports = class Store {
 
 		const todos = this.getLocalStorage().filter(todo => {
 			for (k in query) {
-				if (query[k] !== todo[k]) {
-					return true;
-				}
+				if (query[k] !== todo[k]) return true;
 			}
 			return false;
 		});
 
 		this.setLocalStorage(todos);
 
-		if (callback) {
-			callback(todos);
-		}
+		if (callback) callback(todos);
 	}
 
 	/**
@@ -449,9 +443,7 @@ module.exports = class Store {
 			let i = total;
 			let completed = 0;
 
-			while (i--) {
-				completed += data[i].completed;
-			}
+			while (i--) completed += data[i].completed;
 			callback(total, total - completed, completed);
 		});
 	}
@@ -626,9 +618,7 @@ module.exports = class View {
 	setItemComplete(id, completed) {
 		const listItem = qs(`[data-id="${id}"]`);
 
-		if (!listItem) {
-			return;
-		}
+		if (!listItem) return;
 
 		listItem.className = completed ? 'completed' : '';
 
@@ -659,9 +649,7 @@ module.exports = class View {
 	bindAddItem(handler) {
 		$on(this.$newTodo, 'change', ({target}) => {
 			const title = target.value.trim();
-			if (title) {
-				handler(title);
-			}
+			if (title) handler(title);
 		});
 	}
 
@@ -676,18 +664,14 @@ module.exports = class View {
 	 * @param {Function} handler Function called on synthetic event.
 	 */
 	bindToggleAll(handler) {
-		$on(this.$toggleAll, 'click', ({target}) => {
-			handler(target.checked);
-		});
+		$on(this.$toggleAll, 'click', ({target}) => handler(target.checked));
 	}
 
 	/**
 	 * @param {Function} handler Function called on synthetic event.
 	 */
 	bindRemoveItem(handler) {
-		$delegate(this.$todoList, '.destroy', 'click', ({target}) => {
-			handler(_itemId(target));
-		});
+		$delegate(this.$todoList, '.destroy', 'click', ({target}) => handler(_itemId(target)));
 	}
 
 	/**
@@ -704,16 +688,12 @@ module.exports = class View {
 	 */
 	bindEditItemSave(handler) {
 		$delegate(this.$todoList, 'li .edit', 'blur', ({target}) => {
-			if (!target.dataset.iscanceled) {
-				handler(_itemId(target), target.value.trim());
-			}
+			if (!target.dataset.iscanceled) handler(_itemId(target), target.value.trim());
 		}, true);
 
 		// Remove the cursor from the input when you hit enter just like if it were a real form
 		$delegate(this.$todoList, 'li .edit', 'keypress', ({target, keyCode}) => {
-			if (keyCode === ENTER_KEY) {
-				target.blur();
-			}
+			if (keyCode === ENTER_KEY) target.blur();
 		});
 	}
 

@@ -126,9 +126,7 @@ module.exports = class View {
 	setItemComplete(id, completed) {
 		const listItem = qs(`[data-id="${id}"]`);
 
-		if (!listItem) {
-			return;
-		}
+		if (!listItem) return;
 
 		listItem.className = completed ? 'completed' : '';
 
@@ -159,9 +157,7 @@ module.exports = class View {
 	bindAddItem(handler) {
 		$on(this.$newTodo, 'change', ({target}) => {
 			const title = target.value.trim();
-			if (title) {
-				handler(title);
-			}
+			if (title) handler(title);
 		});
 	}
 
@@ -176,18 +172,14 @@ module.exports = class View {
 	 * @param {Function} handler Function called on synthetic event.
 	 */
 	bindToggleAll(handler) {
-		$on(this.$toggleAll, 'click', ({target}) => {
-			handler(target.checked);
-		});
+		$on(this.$toggleAll, 'click', ({target}) => handler(target.checked));
 	}
 
 	/**
 	 * @param {Function} handler Function called on synthetic event.
 	 */
 	bindRemoveItem(handler) {
-		$delegate(this.$todoList, '.destroy', 'click', ({target}) => {
-			handler(_itemId(target));
-		});
+		$delegate(this.$todoList, '.destroy', 'click', ({target}) => handler(_itemId(target)));
 	}
 
 	/**
@@ -204,16 +196,12 @@ module.exports = class View {
 	 */
 	bindEditItemSave(handler) {
 		$delegate(this.$todoList, 'li .edit', 'blur', ({target}) => {
-			if (!target.dataset.iscanceled) {
-				handler(_itemId(target), target.value.trim());
-			}
+			if (!target.dataset.iscanceled) handler(_itemId(target), target.value.trim());
 		}, true);
 
 		// Remove the cursor from the input when you hit enter just like if it were a real form
 		$delegate(this.$todoList, 'li .edit', 'keypress', ({target, keyCode}) => {
-			if (keyCode === ENTER_KEY) {
-				target.blur();
-			}
+			if (keyCode === ENTER_KEY) target.blur();
 		});
 	}
 

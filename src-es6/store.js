@@ -30,9 +30,7 @@ module.exports = class Store {
 		 *
 		 * @param {ItemList} todos Array of todos to write
 		 */
-		this.setLocalStorage = (todos) => {
-			localStorage.setItem(name, JSON.stringify(liveTodos = todos));
-		};
+		this.setLocalStorage = todos => localStorage.setItem(name, JSON.stringify(liveTodos = todos));
 
 		if (callback) {
 			callback();
@@ -119,18 +117,14 @@ module.exports = class Store {
 
 		const todos = this.getLocalStorage().filter(todo => {
 			for (k in query) {
-				if (query[k] !== todo[k]) {
-					return true;
-				}
+				if (query[k] !== todo[k]) return true;
 			}
 			return false;
 		});
 
 		this.setLocalStorage(todos);
 
-		if (callback) {
-			callback(todos);
-		}
+		if (callback) callback(todos);
 	}
 
 	/**
@@ -145,9 +139,7 @@ module.exports = class Store {
 			let i = total;
 			let completed = 0;
 
-			while (i--) {
-				completed += data[i].completed;
-			}
+			while (i--) completed += data[i].completed;
 			callback(total, total - completed, completed);
 		});
 	}
