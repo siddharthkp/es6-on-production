@@ -12,12 +12,12 @@
     "snippets": "run-s snippets:*"
   },
   "dependencies": {
-    "browserify": "^13.1.1",
     "serve": "^3.2.2",
     "todomvc-app-css": "^2.0.1",
     "todomvc-common": "^1.0.2"
   },
   "devDependencies": {
+    "browserify": "^13.1.1",
     "babel-plugin-transform-async-to-generator": "^6.22.0",
     "babelify": "^7.3.0",
     "cli-table2": "^0.2.0",
