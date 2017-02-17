@@ -1,11 +1,12 @@
 const fs = require('fs');
 const Table = require('cli-table2');
+const colors = require('colors');
 
 const sizes = {};
 const files = ['es5', 'es6', 'transpiled-es5'];
 
 const table = new Table({
-  head: ['file', 'size', 'comparison']
+  head: ['file'.blue, 'size'.blue, 'comparison'.blue]
 });
 
 for (let file of files) sizes[file] = fs.statSync(`dist/bundle-${file}.js`).size;
