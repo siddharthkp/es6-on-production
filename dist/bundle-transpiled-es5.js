@@ -204,7 +204,8 @@ module.exports = function () {
 
 				try {
 					for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-						var id = _step.value.id;
+						var _ref = _step.value;
+						var id = _ref.id;
 
 						_this7.toggleCompleted(id, completed);
 					}
