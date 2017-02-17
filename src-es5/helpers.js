@@ -4,7 +4,7 @@
  * @param {string} selector Selector to query
  * @param {Element} [scope] Optional scope element for the selector
  */
-const qs = (selector, scope) => {
+function qs (selector, scope) {
 	return (scope || document).querySelector(selector);
 }
 
@@ -16,7 +16,7 @@ const qs = (selector, scope) => {
  * @param {Function} callback Event callback
  * @param {boolean} [capture] Capture the event
  */
-const $on = (target, type, callback, capture) => {
+function $on (target, type, callback, capture) {
 	target.addEventListener(type, callback, !!capture);
 }
 
@@ -30,10 +30,10 @@ const $on = (target, type, callback, capture) => {
  *                           from an element matching selector
  * @param {boolean} [capture] Capture the event
  */
-const $delegate = (target, selector, type, handler, capture) => {
-	const dispatchEvent = event => {
-		const targetElement = event.target;
-		const potentialElements = target.querySelectorAll(selector);
+function $delegate (target, selector, type, handler, capture) {
+	var dispatchEvent = function(event) {
+		var targetElement = event.target;
+		var potentialElements = target.querySelectorAll(selector);
 		let i = potentialElements.length;
 
 		while (i--) {
@@ -55,11 +55,13 @@ const $delegate = (target, selector, type, handler, capture) => {
  *
  * @returns {string} String with unsafe characters escaped with entity codes
  */
-const escapeForHTML = s => s.replace(/[&<]/g, c => c === '&' ? '&amp;' : '&lt;');
+function escapeForHTML (s) {
+  return s.replace(/[&<]/g, c => c === '&' ? '&amp;' : '&lt;');
+};
 
 module.exports = {
-  qs,
-  $on,
-  $delegate,
-  escapeForHTML
+  qs: qs,
+  $on: $on,
+  $delegate: $delegate,
+  escapeForHTML: escapeForHTML
 }

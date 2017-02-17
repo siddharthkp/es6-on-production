@@ -13,7 +13,7 @@ var ItemList;
  *
  * @enum {Object}
  */
-const Empty = {
+var Empty = {
 	Record: {}
 };
 
@@ -29,7 +29,7 @@ var EmptyItemQuery;
  *
  * @type {EmptyItemQuery}
  */
-const emptyItemQuery = Empty.Record;
+var emptyItemQuery = Empty.Record;
 
 /**
  * @typedef {!({id: number}|{completed: boolean}|EmptyItemQuery)}
@@ -43,10 +43,10 @@ var ItemUpdate;
 
 
 module.exports = {
-  Item,
-  ItemList,
-  EmptyItemQuery,
-  emptyItemQuery,
-  ItemQuery,
-  ItemUpdate
+  Item: Item,
+  ItemList: ItemList,
+  EmptyItemQuery: EmptyItemQuery,
+  emptyItemQuery: emptyItemQuery,
+  ItemQuery: ItemQuery,
+  ItemUpdate: ItemUpdate
 };

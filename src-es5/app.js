@@ -1,19 +1,24 @@
-const Controller = require('./controller');
-const {$on} = require('./helpers');
-const Template = require('./template');
-const Store = require('./store');
-const View = require('./view');
+var Controller = require('./controller');
+var helpers = require('./helpers');
+var $on = helpers.$on;
 
-const store = new Store('todos-vanilla-es6');
+var Template = require('./template');
+var Store = require('./store');
+var View = require('./view');
 
-const template = new Template();
-const view = new View(template);
+var store = new Store('todos-vanilla-es6');
+
+var template = new Template();
+var view = new View(template);
 
 /**
  * @type {Controller}
  */
-const controller = new Controller(store, view);
+var controller = new Controller(store, view);
 
-const setView = () => controller.setView(document.location.hash);
+function setView() {
+  return controller.setView(document.location.hash);
+};
+
 $on(window, 'load', setView);
 $on(window, 'hashchange', setView);
