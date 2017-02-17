@@ -2,6 +2,6 @@
   "presets": [
     ["env", {"targets": {
       "browsers": ["chrome > 52", "ie > 9"]}
-    }]
-  ], "react"
+    }], "react"
+  ]
 }
