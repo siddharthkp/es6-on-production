@@ -14,7 +14,7 @@ for (let file of files) sizes[file] = fs.statSync(`dist/bundle-${file}.js`).size
 for (let file in sizes) table.push([
   file,
   sizes[file],
-  (sizes[file]/sizes['es6'] * 100).toFixed(2) + '%'
+  (sizes[file]/sizes['es5'] * 100).toFixed(2) + '%'
 ]);
 
 console.log(table.toString());
