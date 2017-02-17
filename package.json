@@ -4,9 +4,14 @@
     "build:5": "browserify src-es5/*.js -o dist/bundle-es5.js",
     "build:6": "browserify src-es6/*.js -o dist/bundle-es6.js",
     "build:t": "browserify src-es6/*.js -o dist/bundle-transpiled-es5.js -t babelify",
+
     "build": "run-p build:*",
     "start": "serve -p 8000",
-    "compare": "node compare.js"
+    "compare": "node compare.js",
+
+    "snippets:build": "cd snippets/original && babel *.js -d ../transpiled",
+    "snippets:compare": "node snippets/compare-snippets.js",
+    "snippets": "run-s snippets:*"
   },
   "dependencies": {
     "browserify": "^13.1.1",
