@@ -66,7 +66,9 @@ Controller.prototype.addItem = function(title) {
 Controller.prototype.editItemSave = function(id, title) {
 	if (title.length) {
     var self = this;
-		this.store.update({id, title}, function () {
+		this.store.update(item, function () {
+      var id = item.id;
+      var title = item.title;
 			self.view.editItemDone(id, title);
 		});
 	} else {
@@ -81,7 +83,8 @@ Controller.prototype.editItemSave = function(id, title) {
  */
 Controller.prototype.editItemCancel = function (id) {
   var self = this;
-	this.store.find({id}, function(data) {
+	this.store.find(item, function(data) {
+    var id = item.id;
 		var title = data[0].title;
 		self.view.editItemDone(id, title);
 	});
@@ -94,7 +97,8 @@ Controller.prototype.editItemCancel = function (id) {
  */
 Controller.prototype.removeItem = function (id) {
   var self = this;
-	this.store.remove({id}, function () {
+	this.store.remove(item, function () {
+    var id = item.id;
 		self._filter();
 		self.view.removeItem(id);
 	});
@@ -115,7 +119,9 @@ Controller.prototype.removeCompletedItems = function () {
  */
 Controller.prototype.toggleCompleted = function (id, completed) {
   var self = this;
-	this.store.update({id, completed}, function () {
+	this.store.update(item, function () {
+    var id = item.id;
+    var completed = item.completed;
 		self.view.setItemComplete(id, completed);
 	});
 }
@@ -128,7 +134,8 @@ Controller.prototype.toggleCompleted = function (id, completed) {
 Controller.prototype.toggleAll = function (completed) {
   var self = this;
 	this.store.find({completed: !completed}, function (data) {
-		for (let {id} of data) {
+    for (var i = 0; i < data.length; i++) {
+      var id = data[i].id;
 			self.toggleCompleted(id, completed);
 		}
 	});
