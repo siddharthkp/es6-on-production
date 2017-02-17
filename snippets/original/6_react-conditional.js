@@ -1,1 +1,3 @@
-const component = condition === true ? <div>Loading...</div> : <div>{this.state.data}</div>
+const component = () => {
+  return condition === true ? <div>Loading...</div> : <div>{this.state.data}</div>
+}
