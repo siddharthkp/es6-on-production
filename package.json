@@ -4,9 +4,9 @@
     "build:5": "browserify src-es5/*.js -o dist/bundle-es5.js",
     "build:6": "browserify src-es6/*.js -o dist/bundle-es6.js",
     "build:t": "browserify src-es6/*.js -o dist/bundle-transpiled-es5.js -t babelify",
-
     "build": "run-p build:*",
-    "start": "serve -p 8000"
+    "start": "serve -p 8000",
+    "compare": "node compare.js"
   },
   "dependencies": {
     "browserify": "^13.1.1",
@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "babelify": "^7.3.0",
+    "cli-table2": "^0.2.0",
     "npm-run-all": "^3.1.2"
   }
 }
