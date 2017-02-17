@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "scripts": {
+    "build:5": "browserify src-es5/*.js -o dist/bundle-es5.js",
+    "build:6": "browserify src-es6/*.js -o dist/bundle-es6.js",
+    "build:t": "browserify src-es6/*.js -o dist/bundle-transpiled-es5.js -t babelify",
+
+    "build": "run-p build:*",
+    "start": "serve -p 8000"
+  },
+  "dependencies": {
+    "browserify": "^13.1.1",
+    "serve": "^3.2.2",
+    "todomvc-app-css": "^2.0.1",
+    "todomvc-common": "^1.0.2"
+  },
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "npm-run-all": "^3.1.2"
+  }
+}
