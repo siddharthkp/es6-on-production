@@ -4,6 +4,16 @@
 		<meta charset="utf-8">
 		<title>ES6 • TodoMVC</title>
 		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+    <script>
+    var str = 'const noop = (a=1, {b, c}) => Object.assign({}, {}); \
+      class something extends Array {constructor() {}}
+    ';
+    try {
+      eval(str);
+    } catch(e) {
+      location.href = '/es5.html';
+    }
+    </script>
 	</head>
 	<body>
 		<section class="todoapp">
